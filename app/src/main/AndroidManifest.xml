@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.project">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <service
+            android:name=".ping.PingService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity android:name=".ping.PingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".retrofit.UploadProgressActivity" />
+        <activity
+            android:name=".exo.ExoPlayerActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout" />
+        <activity android:name=".edulive.HomeActivity" />
+        <activity android:name=".calendarevent.CalendarActivity" />
+        <activity android:name=".calendarevent.CalendarEventActivity" />
+        <activity android:name=".MainActivity"></activity>
+    </application>
+
+</manifest>
