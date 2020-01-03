@@ -19,13 +19,16 @@
             android:exported="true"></service>
 
         <activity android:name=".ping.PingActivity">
+
+        </activity>
+        <activity android:name=".retrofit.UploadProgressActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".retrofit.UploadProgressActivity" />
+
         <activity
             android:name=".exo.ExoPlayerActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout" />

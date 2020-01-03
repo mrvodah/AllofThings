@@ -52,6 +52,8 @@ public class ProgressRequestBody extends RequestBody {
                 // update progress on UI thread
                 handler.post(new ProgressUpdater(uploaded, fileLength));
             }
+        } catch (Exception ex){
+            mListener.onError();
         } finally {
             in.close();
         }
@@ -68,7 +70,15 @@ public class ProgressRequestBody extends RequestBody {
 
         @Override
         public void run() {
-            mListener.onProgressUpdate((int) (100 * mUploaded / mTotal));
+            int progress = (int) (100 * mUploaded / mTotal);
+            if(progress < 100){
+                mListener.onProgressUpdate(progress);
+            }
+            else{
+                mListener.onProgressUpdate(progress);
+                mListener.onFinish();
+            }
+
         }
     }
 
