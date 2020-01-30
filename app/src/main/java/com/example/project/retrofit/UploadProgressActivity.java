@@ -96,7 +96,7 @@ public class UploadProgressActivity extends AppCompatActivity implements Progres
         ProgressRequestBody fileBody = new ProgressRequestBody(file, mediaFile.getMimeType(), this);
         MultipartBody.Part body = MultipartBody.Part.createFormData("file_upload", mediaFile.getName(), fileBody);
 
-        NetworkModule.getService().uploadFileDiscussion(id, body, email, token)
+        NetworkModule.getService(this).uploadFileDiscussion(id, body, email, token)
                 .enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "162782477857",
+    "firebase_url": "https://allofthings.firebaseio.com",
+    "project_id": "allofthings",
+    "storage_bucket": "allofthings.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162782477857:android:033a6d68a49226b5412d60",
+        "android_client_info": {
+          "package_name": "com.example.project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162782477857-6ok7k3rl0k9li41lc43fvv4tngek7nqn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.project",
+            "certificate_hash": "452da9651a5f6c657b06fcbf490a93fbf3d10d2e"
+          }
+        },
+        {
+          "client_id": "162782477857-551svk04hjcf80m719m1n8iafsmjbs5g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5gjPibXch3vLBmPDbItp1brswm1NIcrg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162782477857-551svk04hjcf80m719m1n8iafsmjbs5g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
