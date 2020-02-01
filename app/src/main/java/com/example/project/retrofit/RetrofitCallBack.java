@@ -16,6 +16,27 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.example.project.retrofit.config.AppVersion;
+import com.example.project.retrofit.config.Config;
+import com.example.project.retrofit.config.SectionSentence;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,14 +67,27 @@ public class RetrofitCallBack<T> implements Callback<T> {
     public void onResponse(Call<T> call, Response<T> response) {
         try {
             if (response.errorBody() != null) {
-
+                if (listenerWithFailed != null) {
+                    listenerWithFailed.onResponse(call, response);
+                }
             } else {
-                String jsonResponse = new Gson().toJson(response.body());
-                JSONObject jsonObject = new JSONObject(jsonResponse);
-                Log.d(TAG, "onResponse:1 " + response.body().toString());
-                Log.d(TAG, "onResponse:2 " + jsonObject.toString());
 
+                if(response.raw().cacheResponse() != null){
+                    Log.d(TAG, "onResponse: cache");
+                }
+
+                if(response.raw().networkResponse() != null){
+                    Log.d(TAG, "onResponse: network");
+                }
+
+                if (listener != null) {
+                    listener.onResponse(call, response);
+                }
+                if (listenerWithFailed != null) {
+                    listenerWithFailed.onResponse(call, response);
+                }
             }
+            Log.d(TAG, "onResponse: " + response.code());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -61,7 +95,9 @@ public class RetrofitCallBack<T> implements Callback<T> {
 
     @Override
     public void onFailure(Call<T> call, Throwable t) {
-
+        if (listenerWithFailed != null)
+            listenerWithFailed.onFailure(call, t);
+        Log.d(TAG, "onFailure: " + t.getMessage());
     }
 
     public interface Listener<T> {

@@ -3,6 +3,7 @@ package com.example.project.retrofit;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.project.MainActivity;
 import com.example.project.R;
 import com.google.gson.JsonObject;
 import com.jaiselrahman.filepicker.activity.FilePickerActivity;
@@ -32,14 +34,12 @@ public class UploadProgressActivity extends AppCompatActivity implements Progres
     private static final String TAG = "UploadProgressActivity";
     private static final int IMAGE_REQUEST_CODE = 1;
 
-    ProgressBar progressBar;
+    ProgressDialog progressdialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_progress);
-
-        progressBar = findViewById(R.id.progressBar);
 
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +57,20 @@ public class UploadProgressActivity extends AppCompatActivity implements Progres
                 startActivityForResult(intent, IMAGE_REQUEST_CODE);
             }
         });
+
+        createDialog();
+    }
+
+    private void createDialog() {
+        progressdialog = new ProgressDialog(UploadProgressActivity.this);
+
+        progressdialog.setIndeterminate(false);
+
+        progressdialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+
+        progressdialog.setCancelable(false);
+
+        progressdialog.setMax(100);
     }
 
     @Override
@@ -66,7 +80,6 @@ public class UploadProgressActivity extends AppCompatActivity implements Progres
         if (resultCode == RESULT_OK) {
 
             ArrayList<MediaFile> files = data.getParcelableArrayListExtra(FilePickerActivity.MEDIA_FILES);
-//            adapter.setItems(files);
             for (MediaFile file : files) {
                 rqUploadFile(81, file);
             }
@@ -74,6 +87,7 @@ public class UploadProgressActivity extends AppCompatActivity implements Progres
     }
 
     private void rqUploadFile(int discussionId, MediaFile mediaFile) {
+        progressdialog.show();
         File file = new File(mediaFile.getPath());
         RequestBody id = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(discussionId));
         RequestBody email = RequestBody.create(MediaType.parse("text/plain"), "minhadmin@edulive.net");
@@ -82,7 +96,7 @@ public class UploadProgressActivity extends AppCompatActivity implements Progres
         ProgressRequestBody fileBody = new ProgressRequestBody(file, mediaFile.getMimeType(), this);
         MultipartBody.Part body = MultipartBody.Part.createFormData("file_upload", mediaFile.getName(), fileBody);
 
-        NetworkModule.getService().uploadFileDiscussion(id, body, email, token)
+        NetworkModule.getService(this).uploadFileDiscussion(id, body, email, token)
                 .enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -99,17 +113,18 @@ public class UploadProgressActivity extends AppCompatActivity implements Progres
     @Override
     public void onProgressUpdate(int percentage) {
         Log.d(TAG, "onProgressUpdate: " + percentage);
-        progressBar.setProgress(percentage);
+        progressdialog.setProgress(percentage);
     }
 
     @Override
     public void onError() {
-
+        progressdialog.dismiss();
+//        Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onFinish() {
-        Log.d(TAG, "onProgressUpdate: " + 100);
-        progressBar.setProgress(100);
+        progressdialog.dismiss();
+//        Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
     }
 }

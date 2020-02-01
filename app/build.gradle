@@ -27,6 +27,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':speech')
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
@@ -52,6 +53,16 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.6.3'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.3'
 
+    //firebase
+    implementation 'com.google.firebase:firebase-analytics:17.2.1'
+
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
+
+    implementation 'com.facebook.android:facebook-android-sdk:5.0.0'
+
     implementation 'com.github.jaiselrahman:FilePicker:1.3.2'
 
     def lifecycle_version = "2.1.0"
@@ -60,9 +71,15 @@ dependencies {
 
     implementation 'com.akexorcist:RoundCornerProgressBar:2.0.3'
 
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
-
     implementation 'org.greenrobot:eventbus:3.1.1'
 
+    //memoryleak
+    // debugImplementation because LeakCanary should only run in debug builds.
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.1'
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
+
+    debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
 
 }
+apply plugin: 'com.google.gms.google-services'

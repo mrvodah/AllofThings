@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent_chat_heat_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3A632E">
+    <TextView
+        android:id="@+id/chat_heat_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edulive Group Learning in call"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/white"
+        android:layout_centerInParent="true"
+        />
+</RelativeLayout>

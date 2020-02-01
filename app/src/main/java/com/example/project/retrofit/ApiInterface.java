@@ -1,6 +1,7 @@
 package com.example.project.retrofit;
 
 import com.example.project.retrofit.config.Config;
+import com.example.project.retrofit.config.ConfigResponse;
 import com.google.gson.JsonObject;
 
 import okhttp3.MultipartBody;
@@ -19,5 +20,5 @@ public interface ApiInterface {
                                                   @Part("email") RequestBody email, @Part("token") RequestBody token);
 
     @GET("config")
-    Call<Config> getConfig();
+    Call<ConfigResponse> getConfig();
 }
