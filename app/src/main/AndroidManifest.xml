@@ -13,26 +13,37 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <service
-            android:name=".ping.PingService"
-            android:enabled="true"
-            android:exported="true"></service>
-
-        <activity android:name=".ping.PingActivity">
+        <activity android:name=".firebase.AnalyticsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".retrofit.config.ConfigActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".event.EventTwoActivity" />
+        <activity android:name=".event.EventActivity"></activity>
+        <activity android:name=".progressvertical.ProgressActivity" />
+        <activity android:name=".ping.Ping1Activity" />
+        <activity android:name=".ping.Ping2Activity" />
+
+        <service
+            android:name=".ping.PingService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".ping.PingActivity" />
         <activity android:name=".retrofit.UploadProgressActivity" />
         <activity
             android:name=".exo.ExoPlayerActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout" />
-        <activity android:name=".edulive.HomeActivity" />
-        <activity android:name=".calendarevent.CalendarActivity" />
-        <activity android:name=".calendarevent.CalendarEventActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

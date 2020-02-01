@@ -1,6 +1,8 @@
 package com.example.project.retrofit;
 
-import java.io.IOException;
+import com.example.project.retrofit.config.LoggingInterceptor;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -8,12 +10,9 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import javax.security.cert.CertificateException;
 
-import okhttp3.Credentials;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -49,7 +48,12 @@ public class RetrofitClient {
             // Create an ssl socket factory with our all-trusting manager
             final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
 
+            HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            builder.addInterceptor(new LoggingInterceptor());
+            builder.addInterceptor(httpLoggingInterceptor);
             builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
             builder.hostnameVerifier(new HostnameVerifier() {
                 @Override
@@ -68,7 +72,7 @@ public class RetrofitClient {
 
             retrofit = new Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("https://beta.edulive.net:8443/api/")
+                    .baseUrl("https://api.easylanguage.vn/v4/")
                     .client(getUnsafeOkHttpClient().build())
                     .build();
         }
