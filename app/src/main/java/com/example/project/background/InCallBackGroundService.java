@@ -83,7 +83,7 @@ public class InCallBackGroundService extends Service {
 //        //Add the view to the window.
 //        final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
 //                WindowManager.LayoutParams.MATCH_PARENT,
-//                Utils.getStatusBarHeight(getApplicationContext()),
+//                Util.getStatusBarHeight(getApplicationContext()),
 //                WindowManager.LayoutParams.TYPE_PHONE,
 //                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
 //                PixelFormat.TRANSLUCENT);

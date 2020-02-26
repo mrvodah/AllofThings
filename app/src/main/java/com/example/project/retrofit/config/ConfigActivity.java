@@ -19,12 +19,12 @@ public class ConfigActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
 
-        NetworkModule.getService().getConfig()
-                .enqueue(new RetrofitCallBack<Config>(this, new RetrofitCallBack.Listener<Config>() {
-                    @Override
-                    public void onResponse(Call<Config> call, Response<Config> response) {
-
-                    }
-                }));
+//        NetworkModule.getService(this).getConfig()
+//                .enqueue(new RetrofitCallBack<Config>(this, new RetrofitCallBack.Listener<Config>() {
+//                    @Override
+//                    public void onResponse(Call<Config> call, Response<Config> response) {
+//
+//                    }
+//                }));
     }
 }

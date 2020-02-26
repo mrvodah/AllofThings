@@ -81,5 +81,9 @@ dependencies {
 
     debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
 
+    implementation 'com.vincent.filepicker:MultiTypeFilePicker:1.0.8'
+
+    implementation 'com.github.adrielcafe:AndroidAudioRecorder:0.3.0'
+
 }
 apply plugin: 'com.google.gms.google-services'

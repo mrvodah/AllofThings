@@ -64,7 +64,6 @@ public class RetrofitClient {
 
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             builder.addInterceptor(new LoggingInterceptor());
-            builder.addInterceptor(httpLoggingInterceptor);
             builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
             builder.addInterceptor(new ChuckInterceptor(context));
             builder.addInterceptor(logging);
